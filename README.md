@@ -1,2 +1,2 @@
-# ruffr-fullstack
-A return to ruffr using a slightly different approach
+# react-boiler
+React, Node and Webpack boilerplate for full-stack apps
