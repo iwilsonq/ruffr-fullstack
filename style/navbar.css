@@ -24,12 +24,33 @@
   color: goldenrod;
 }
 
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.mobile-menu a {
+  text-decoration: none;
+  color: #fff;
+}
+
 @media only screen and (max-width: 500px){
   .menu {
     display: none;
   }
+
   .menu-collapsed {
     margin-right: 20px;
+  }
+
+  .menu-collapsed a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .menu-collapsed a:hover {
+    color: goldenrod;
   }
 }
 
@@ -41,6 +62,10 @@
   }
 
   .menu-collapsed {
+    display: none;
+  }
+
+  .mobile-menu {
     display: none;
   }
 
