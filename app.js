@@ -15,7 +15,7 @@ mongoose.connect(config.url);
 mongoose.connection.on('error', function() {
   console.error('MongoDB Connection Error. Make sure MongoDB is running.');
 });
-require('./server/config/passport')(passport);
+require('./server/config/passport.js')(passport);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -51,6 +51,24 @@ if (process.env.NODE_ENV !== 'production') {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
   });
 }
+
+// app.get('/login', auth.signin);
+app.post('/login', passport.authenticate('local-login', {
+   //Success go to Profile Page / Fail go to login page
+  successRedirect : '/profile',
+  failureRedirect : '/login',
+  failureFlash : true
+}));
+
+// app.get('/signup', auth.signup);
+app.post('/signup', passport.authenticate('local-signup', {
+  //Success go to Profile Page / Fail go to Signup page
+  successRedirect : '/profile',
+  failureRedirect : '/signup',
+  failureFlash : true
+}));
+
+app.get('/profile', (req, res) => res.send('Welcome to profile!'))
 
 app.get('/comments', (req, res) => res.send({ hi: 'there' }))
 
