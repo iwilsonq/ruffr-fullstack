@@ -4,7 +4,7 @@
   "description": "Scaffold your full stack react apps today!",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon app.js",
     "build": "NODE_ENV=production npm run clean && webpack -p",
     "clean": "rimraf dist"
   },
@@ -19,8 +19,19 @@
   },
   "homepage": "https://github.com/iwilsonq/react-boiler#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "~1.13.2",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^1.3.2",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "mongoose": "^4.4.5",
+    "morgan": "^1.7.0",
+    "multer": "^1.1.0",
     "nodemon": "^1.11.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-motion": "^0.4.7"

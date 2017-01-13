@@ -21,7 +21,7 @@ class MobileMenu extends Component {
       {key: 'Feed'}, {key: 'Explore'}, {key: 'Profile'}
     ]
   }
-  
+
   componentDidMount() {
     this.setState({
       items: [
@@ -107,7 +107,7 @@ class Navbar extends Component {
 
   render() {
     const { showMobileMenu } = this.state;
-    console.log(showMobileMenu);
+
     return (
       <nav className="nav">
         <div className="navbar">
