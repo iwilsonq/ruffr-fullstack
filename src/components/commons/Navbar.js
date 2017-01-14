@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TransitionMotion, spring, presets } from 'react-motion';
-import '../style/navbar.css';
+import '../../../style/navbar.css';
 
 const Menu = () =>
   <ul className="menu">
@@ -111,18 +111,20 @@ class Navbar extends Component {
     return (
       <nav className="nav">
         <div className="navbar">
-          <div className="navbar-brand">
-            Ruffr
-          </div>
-          <div className="navbar-menu">
-            <MenuCollapsed onClick={this.toggleMenu.bind(this)} />
-            <Menu />
+          <div className="navbar-content">  
+            <div className="navbar-brand">
+              Ruffr
+            </div>
+            <div className="navbar-menu">
+              <MenuCollapsed onClick={this.toggleMenu.bind(this)} />
+              <Menu />
+            </div>
           </div>
         </div>
         {showMobileMenu ? <MobileMenu /> : null}
-    </nav>
+      </nav>
     );
   }
 };
 
-export default Navbar;
+export { Navbar };

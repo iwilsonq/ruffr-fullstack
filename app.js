@@ -52,6 +52,7 @@ if (process.env.NODE_ENV !== 'production') {
   const compiler = webpack(webpackConfig)
   app.use(webpackDevMiddleware(compiler));
   app.use(webpackHotMiddleware(compiler));
+  app.use(express.static('public'));
 } else {
   app.use(express.static('dist'));
   app.get('*', (req, res) => {

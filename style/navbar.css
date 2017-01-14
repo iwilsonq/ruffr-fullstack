@@ -1,13 +1,19 @@
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   color: #fff;
   background-color: #2d2d2d;
   box-shadow: 3px 3px 3px rgba(0,0,0,0.3);
-  height: 8vh;
-  padding: 15px 15px 15px 15px;
+  height: 7vh;
+  padding: 26px 40px;
   font-size: 3vh;
+}
+
+.navbar-content {
+  max-width: 1010px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .menu > li {
@@ -56,9 +62,9 @@
 
 @media only screen and (min-width: 500px) {
   .navbar {
-    height: 8vh;
+    height: 7vh;
     font-size: 3vh;
-    padding: 15px 15px 15px 15px;
+    padding: 26px 40px;
   }
 
   .menu-collapsed {
