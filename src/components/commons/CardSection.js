@@ -22,7 +22,11 @@ const imageSectionStyle = {
 };
 
 const textSectionStyle = {
-  padding: '0 24px'
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  padding: '0 24px',
+  minHeight: 65
 };
 
 export { TextSection, ImageSection };

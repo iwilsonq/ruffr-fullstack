@@ -14,7 +14,7 @@ const app = express();
 const multer  = require('multer');
 const upload = multer({
   dest:'./public/uploads/',
-  limits: { fileSize: 1000000, files:1 }
+  limits: { fileSize: 5000000, files:1 }
 });
 
 const config = require('./server/config/config.js');

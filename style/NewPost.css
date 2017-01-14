@@ -1,0 +1,26 @@
+.new-post {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #4e4e4e;
+  max-width: 1000px;
+  margin: 0px auto;
+}
+
+.new-section {
+
+}
+
+.image-preview {
+  width: 300px;
+}
+
+.cropper-container {
+  max-width: 800px;
+  margin: 0px auto;
+}
+
+.cropping-tool {
+  position: relative;
+  max-width: 1000;
+}

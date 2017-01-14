@@ -7,6 +7,14 @@ class ImageGallery extends Component {
     return (
       <div className="image-gallery">
         <Card>
+          <TextSection>
+            <div className="user-name">
+              Snarf
+            </div>
+            <div className="date-posted">
+              1h
+            </div>
+          </TextSection>
           <ImageSection>
             <img
               className='image'
@@ -19,6 +27,14 @@ class ImageGallery extends Component {
           </TextSection>
         </Card>
         <Card>
+          <TextSection>
+            <div className="user-name">
+              Sibby
+            </div>
+            <div className="date-posted">
+              2h
+            </div>
+          </TextSection>
           <ImageSection>
             <img
               className='image'

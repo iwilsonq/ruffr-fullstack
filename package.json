@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/iwilsonq/react-boiler#readme",
   "dependencies": {
+    "axios": "^0.15.3",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.13.2",
     "connect-flash": "^0.1.1",
@@ -33,6 +34,7 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "react": "^15.4.2",
+    "react-cropper": "^0.10.0",
     "react-dom": "^15.4.2",
     "react-motion": "^0.4.7"
   },
