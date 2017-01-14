@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -9,6 +10,12 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const MongoStore = require('connect-mongo')(session);
 const app = express();
+
+const multer  = require('multer');
+const upload = multer({
+  dest:'./public/uploads/',
+  limits: { fileSize: 1000000, files:1 }
+});
 
 const config = require('./server/config/config.js');
 mongoose.connect(config.url);
@@ -52,23 +59,66 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-// app.get('/login', auth.signin);
-app.post('/login', passport.authenticate('local-login', {
-   //Success go to Profile Page / Fail go to login page
-  successRedirect : '/profile',
-  failureRedirect : '/login',
-  failureFlash : true
-}));
+app.post('/login', passport.authenticate('local-login'));
 
-// app.get('/signup', auth.signup);
-app.post('/signup', passport.authenticate('local-signup', {
-  //Success go to Profile Page / Fail go to Signup page
-  successRedirect : '/profile',
-  failureRedirect : '/signup',
-  failureFlash : true
-}));
+app.post('/signup', passport.authenticate('local-signup'));
 
-app.get('/profile', (req, res) => res.send('Welcome to profile!'))
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.send('Logged out!');
+});
+
+app.get('/profile', (req, res) => {
+  if (req.isAuthenticated())
+    res.send('Welcome to profile!')
+  res.send('Not authorized to view profile.');
+});
+
+const Images = require('./server/models/images.js');
+app.post('/images', upload.single('image'), (req, res) => {
+  const IMAGE_TYPES = ['image/jpeg','image/jpg', 'image/png'];
+  let src,
+      dest,
+      targetPath,
+      targetName,
+      tempPath = req.file.path,
+      type = req.file.mimetype,
+      extension = req.file.path.split(/[. ]+/).pop();
+
+  if (IMAGE_TYPES.indexOf(type) === -1) {
+    return res.status(415).send('Supported image formats: jpeg, jpg, png.');
+  }
+
+  targetPath = './public/images/' + req.file.originalname;
+  src = fs.createReadStream(tempPath);
+  dest = fs.createWriteStream(targetPath);
+  src.pipe(dest);
+
+  src.on('error', err => {
+    if (err) return res.status(500).send({ message: error });
+  });
+
+  src.on('end', () => {
+    const image = new Images(req.body);
+    image.imageName = req.file.originalname;
+    image.user = req.user;
+    image.save(error => {
+      if (error) {
+        return res.status(400).send({ message: error });
+      }
+    });
+
+    fs.unlink(tempPath, err => {
+      if (err) {
+        return res.status(500).send('Woh, something bad happened here');
+      }
+
+      res.send('Image uploaded');
+    });
+  });
+
+});
+// app.get('/images-gallery', images.hasAuthorization, images.show);
 
 app.get('/comments', (req, res) => res.send({ hi: 'there' }))
 
