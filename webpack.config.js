@@ -18,11 +18,8 @@ const config = {
         exclude: /node_module/
       },
       {
-        test: /\.css$/i,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader'
-        })
+        test: /\.css$/,
+        loader: ['isomorphic-style-loader', 'style-loader', 'css-loader']
       }
     ]
   },
@@ -30,7 +27,7 @@ const config = {
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
-    new ExtractTextPlugin('common.css'),
+    // new ExtractTextPlugin('common.css'),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
