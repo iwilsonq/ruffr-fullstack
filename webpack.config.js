@@ -5,10 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
   devtool: 'cheap-module-source-map',
-  entry: [
-    './src/index.js',
-    'webpack-hot-middleware/client'
-  ],
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
@@ -21,15 +18,19 @@ const config = {
         exclude: /node_module/
       },
       {
-        use: ['style-loader', 'css-loader'],
-        test: /\.css$/
-      },
+        test: /\.css$/i,
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader'
+        })
+      }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
+    new ExtractTextPlugin('common.css'),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),

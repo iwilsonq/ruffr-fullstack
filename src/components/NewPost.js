@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import Axios from 'axios';
+import { Input } from './commons';
 import '../../style/NewPost.css';
 
 class NewPost extends Component {
   state = {
-    title: '',
-    image: ''
+    title: ''
   };
 
   handleSubmit() {
@@ -56,17 +56,13 @@ class NewPost extends Component {
     return (
       <div className="new-post">
           <div className="new-section">
-            <label>
-              Title
-              <input
-                type="text"
-                name="title"
-                className="text-input"
-                value={this.state.title}
-                onChange={this.handleTextChange.bind(this)}
-              />
-            </label>
-
+            <Input
+              label='Title'
+              name='title'
+              type='text'
+              value={this.state.value}
+              onChange={this.handleTextChange.bind(this)}
+            />
           </div>
 
           <div className="new-section">

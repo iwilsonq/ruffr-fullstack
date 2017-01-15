@@ -1,3 +1,4 @@
+import React from 'react';
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -59,6 +60,25 @@ if (process.env.NODE_ENV !== 'production') {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
   });
 }
+
+
+// Server-side redirecting
+const { renderToString } = require('react-dom/server');
+const { match, RouterContext } = require('react-router');
+import routes from './src/routes';
+app.get('*', (req, res) => {
+  match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
+    if (error) {
+      res.status(500).send(error.message)
+    } else if (redirectLocation) {
+      res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+    } else if (renderProps) {
+      res.status(200).send(renderToString(<RouterContext {...renderProps} />))
+    } else {
+      res.status(404).send('Not found')
+    }
+  })
+})
 
 
 app.post('/login', passport.authenticate('local-login'));
