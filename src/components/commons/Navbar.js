@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { TransitionMotion, spring, presets } from 'react-motion';
 import '../../../style/navbar.css';
 
 const Menu = () =>
   <ul className="menu">
-    <li className="menu-item"><a href="#">New Post</a></li>
+    <li className="menu-item"><Link to='new'>New Post</Link></li>
     <li className="menu-item"><a href="#">Explore</a></li>
     <li className="menu-item"><a href="#">Profile</a></li>
   </ul>;
@@ -18,14 +19,18 @@ const MenuCollapsed = props =>
 class MobileMenu extends Component {
   state = {
     items: [
-      {key: 'New Post'}, {key: 'Explore'}, {key: 'Profile'}
+      {key: 'New Post', data: 'new'},
+      {key: 'Explore', data: 'explore'},
+      {key: 'Profile', data: 'profile'}
     ]
   }
 
   componentDidMount() {
     this.setState({
       items: [
-        {key: 'New Post'}, {key: 'Explore'}, {key: 'Profile'}
+        {key: 'New Post', data: 'new'},
+        {key: 'Explore', data: 'explore'},
+        {key: 'Profile', data: 'profile'}
       ]
     });
   }
@@ -85,7 +90,7 @@ class MobileMenu extends Component {
                       padding: 15
                     }}
                   >
-                    <a href="">{config.key}</a>
+                    <Link to={config.data}>{config.key}</Link>
                   </li>
                 );
               })}
@@ -113,7 +118,7 @@ class Navbar extends Component {
         <div className="navbar">
           <div className="navbar-content">
             <div className="navbar-brand">
-              Ruffr
+              <Link to='/'>Ruffr</Link>
             </div>
             <div className="navbar-menu">
               <MenuCollapsed onClick={this.toggleMenu.bind(this)} />

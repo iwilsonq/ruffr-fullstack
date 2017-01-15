@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-// import { browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import Axios from 'axios';
-import CroppingTool from './CroppingTool';
 import '../../style/NewPost.css';
 
 class NewPost extends Component {
@@ -22,7 +21,12 @@ class NewPost extends Component {
       url: 'http://localhost:3050/images',
       data
     })
-    .then(response => console.log(response))
+    .then(response => {
+      console.log(response);
+      browserHistory.push('/');
+    })
+    .catch(err => {throw new Error(err);});
+
   }
 
   handleTextChange(e) {
@@ -31,7 +35,20 @@ class NewPost extends Component {
 
   handleImageUpload(uploader) {
     const image = uploader.target.files[0];
-    console.log(image);
+    const preview = document.querySelector('.image-preview');
+    const img = document.createElement('img');
+    img.style.maxWidth = "300px";
+    preview.appendChild(img);
+
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+      img.src = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+
     this.setState({ image })
   }
 
@@ -39,13 +56,17 @@ class NewPost extends Component {
     return (
       <div className="new-post">
           <div className="new-section">
-            <label>Name</label>
-            <input
-              type="text"
-              name="title"
-              value={this.state.title}
-              onChange={this.handleTextChange.bind(this)}
-            />
+            <label>
+              Title
+              <input
+                type="text"
+                name="title"
+                className="text-input"
+                value={this.state.title}
+                onChange={this.handleTextChange.bind(this)}
+              />
+            </label>
+
           </div>
 
           <div className="new-section">
@@ -55,6 +76,7 @@ class NewPost extends Component {
               name="image"
               onChange={this.handleImageUpload.bind(this)}
             />
+            <div className="image-preview" />
           </div>
 
           <div className="new-section">

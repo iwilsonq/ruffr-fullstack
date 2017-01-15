@@ -2,17 +2,45 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #4e4e4e;
   max-width: 1000px;
-  margin: 0px auto;
+  margin: 60px auto;
 }
 
 .new-section {
+  width: 415px;
+  padding: 20px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
 
+input[type="text"] {
+  margin: 0px 20px;
+  width: 78%;
+  border: none;
+  border-bottom: 2px solid #2d2d2d;
+  background-color: #fafafa;
+  transition: 0.2s;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-bottom: 2px solid #E91E63;
+  transition: 0.2s;
+}
+
+input[type="file"] {
+  margin: 0px 20px;
+  transition: 0.2s;
+}
+
+input[type="file"]:focus {
+  outline: none;
+  border-bottom: 2px solid #E91E63;
+  transition: 0.2s;
 }
 
 .image-preview {
   width: 300px;
+  margin: 20px auto;
 }
 
 .cropper-container {

@@ -1,3 +1,8 @@
+a {
+  text-decoration: none;
+  color: #fff
+}
+
 .navbar {
   color: #fff;
   background-color: #2d2d2d;
@@ -9,7 +14,7 @@
 
 .navbar-content {
   max-width: 1010px;
-  margin-top: 18px;
+  margin-top: 16px;
   margin-left: auto;
   margin-right: auto;
   display: flex;

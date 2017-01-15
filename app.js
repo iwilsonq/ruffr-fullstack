@@ -60,6 +60,7 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
+
 app.post('/login', passport.authenticate('local-login'));
 
 app.post('/signup', passport.authenticate('local-signup'));
@@ -76,6 +77,19 @@ app.get('/profile', (req, res) => {
 });
 
 const Images = require('./server/models/images.js');
+
+app.get('/images', (req, res) => {
+  Images.find().sort('-created').populate('user',
+  'local.email').exec(function(error, images) {
+      if (error) {
+        return res.status(400).send({
+          message: error
+        });
+      }
+      return res.send(images);
+    });
+});
+
 app.post('/images', upload.single('image'), (req, res) => {
   const IMAGE_TYPES = ['image/jpeg','image/jpg', 'image/png'];
   let src,
@@ -83,8 +97,7 @@ app.post('/images', upload.single('image'), (req, res) => {
       targetPath,
       targetName,
       tempPath = req.file.path,
-      type = req.file.mimetype,
-      extension = req.file.path.split(/[. ]+/).pop();
+      type = req.file.mimetype;
 
   if (IMAGE_TYPES.indexOf(type) === -1) {
     return res.status(415).send('Supported image formats: jpeg, jpg, png.');
@@ -121,7 +134,7 @@ app.post('/images', upload.single('image'), (req, res) => {
 });
 // app.get('/images-gallery', images.hasAuthorization, images.show);
 
-app.get('/comments', (req, res) => res.send({ hi: 'there' }))
+app.get('/comments', (req, res) => res.send({ hi: 'there' }));
 
 app.set('port', process.env.PORT || 3050)
 app.listen(app.get('port'), () => console.log(`Listening at http://localhost:${app.get('port')}`));
