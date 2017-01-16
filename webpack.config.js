@@ -20,6 +20,16 @@ const config = {
       {
         test: /\.css$/,
         loader: ['isomorphic-style-loader', 'style-loader', 'css-loader']
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: { limit: 100000 }
+          },
+          'image-webpack-loader'
+        ]
       }
     ]
   },

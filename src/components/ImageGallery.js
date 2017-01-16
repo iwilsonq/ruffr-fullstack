@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { TextSection, ImageSection, Card } from './commons';
+import sibby from '../../public/images/sibby.jpg';
+import snarf from '../../public/images/snarf.jpg';
 import '../../style/ImageGallery.css';
 
 class ImageGallery extends Component {
@@ -18,7 +20,7 @@ class ImageGallery extends Component {
           <ImageSection>
             <img
               className='image'
-              src='http://localhost:3050/images/snarf.jpg'
+              src={snarf}
               alt="snarf"
             />
           </ImageSection>
@@ -38,7 +40,7 @@ class ImageGallery extends Component {
           <ImageSection>
             <img
               className='image'
-              src='http://localhost:3050/images/sibby.jpg'
+              src={sibby}
               alt="sibby"
             />
           </ImageSection>
