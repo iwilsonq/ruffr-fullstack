@@ -25,7 +25,9 @@ class NewPost extends Component {
       console.log(response);
       browserHistory.push('/');
     })
-    .catch(err => {throw new Error(err);});
+    .catch(err => {
+      throw new Error(err.message);
+    });
 
   }
 

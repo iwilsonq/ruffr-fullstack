@@ -1,0 +1,16 @@
+html, body, ul, li {
+  padding: 0px;
+  margin: 0px;
+  font-family: 'Roboto';
+}
+body {
+  background-color: #fafafa;
+}
+
+.btn {
+  padding: 5px;
+  background-color: #fff;
+  font-size: 2vh;
+  border: 3px solid steelblue;
+  margin: 5px 10px;
+}

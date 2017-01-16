@@ -24,10 +24,12 @@ module.exports = function(passport) {
     function(req, email, password, done) {
       if (email)
       // format to lower-case
-      email = email.toLowerCase();
+        email = email.toLowerCase();
+
       // process asynchronous
       process.nextTick(function() {
         User.findOne({ 'local.email': email }, function(err, user) {
+
           if (err) return done(err);
 
           if (!user)

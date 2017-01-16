@@ -15,7 +15,7 @@ const app = express();
 const multer  = require('multer');
 const upload = multer({
   dest:'./public/uploads/',
-  limits: { fileSize: 5000000, files:1 }
+  limits: { fileSize: 1000000, files:1 }
 });
 
 const config = require('./server/config/config.js');
@@ -62,7 +62,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 
-// Server-side redirecting
+// Server-side rendering
 const { renderToString } = require('react-dom/server');
 const { match, RouterContext } = require('react-router');
 import routes from './src/routes';
@@ -96,12 +96,20 @@ app.get('*', (req, res) => {
       res.status(404).send('Not found')
     }
   })
-})
+});
 
 
-app.post('/login', passport.authenticate('local-login'));
+app.post('/login', passport.authenticate('local-login', {
+  successRedirect : '/',
+  failureRedirect : '/login',
+  failureFlash : true
+}));
 
-app.post('/signup', passport.authenticate('local-signup'));
+app.post('/signup', passport.authenticate('local-signup', {
+  successRedirect : '/',
+  failureRedirect : '/signup',
+  failureFlash : true
+}));
 
 app.get('/logout', function(req, res) {
   req.logout();
@@ -147,16 +155,16 @@ app.post('/images', upload.single('image'), (req, res) => {
   src.pipe(dest);
 
   src.on('error', err => {
-    if (err) return res.status(500).send({ message: error });
+    if (err) return res.status(500).send({ message: err });
   });
 
   src.on('end', () => {
     const image = new Images(req.body);
     image.imageName = req.file.originalname;
     image.user = req.user;
-    image.save(error => {
-      if (error) {
-        return res.status(400).send({ message: error });
+    image.save(err => {
+      if (err) {
+        return res.status(400).send({ message: err });
       }
     });
 

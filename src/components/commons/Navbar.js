@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { TransitionMotion, spring, presets } from 'react-motion';
-import '../../../style/navbar.css';
+import '../../../style/Navbar.css';
 
 const Menu = () =>
   <ul className="menu">
