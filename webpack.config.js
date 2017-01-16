@@ -22,7 +22,7 @@ const config = {
         loader: ['isomorphic-style-loader', 'style-loader', 'css-loader']
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/,
+        test: /\.(jpe?g|jpg|png|gif|svg)$/,
         use: [
           {
             loader: 'url-loader',

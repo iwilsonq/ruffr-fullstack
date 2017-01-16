@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { TextSection, ImageSection, Card } from './commons';
-import sibby from '../../public/images/sibby.jpg';
-import snarf from '../../public/images/snarf.jpg';
 import '../../style/ImageGallery.css';
+
+const baseURL = 'http://localhost:3050';
 
 class ImageGallery extends Component {
   render() {
@@ -20,7 +20,7 @@ class ImageGallery extends Component {
           <ImageSection>
             <img
               className='image'
-              src={snarf}
+              src={`${baseURL}/images/snarf.jpg`}
               alt="snarf"
             />
           </ImageSection>
@@ -40,7 +40,7 @@ class ImageGallery extends Component {
           <ImageSection>
             <img
               className='image'
-              src={sibby}
+              src={`${baseURL}/images/sibby.jpg`}
               alt="sibby"
             />
           </ImageSection>
